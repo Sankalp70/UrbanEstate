@@ -1,25 +1,34 @@
-import React from "react";
 import {useNavigate,useState} from 'react';
 import axios from "axios";
 
 const Signup = () => {
 
+  const [error,setError] = useState("");
+
  const navigate = useNavigate();
 
- const handleSubmit = async (e)=>{
+ const handleSubmit = async (e) => {
   e.preventDefault();
+  setError("")
+
   const formData = new FormData(e.target);
+  
+  const username = formData.get("username");
+  const email = formData.get("email");
+  const password = formData.get("password");
 
-  const username=formData.get('username');
-  const email=formData.get('email')
-  const password=formData.get('password')
-
-  const res = await axios.post("http://localhost:5000/api/auth/register",{
-      username,email,password
-  })
-  navigate("/")
-}  
-
+  try {
+    const res = await axios.post("http://localhost:5000/api/auth/register", {
+      username,
+      email,
+      password,
+    });
+         
+    navigate("/login");
+  } catch (err) {
+    setError(err.response.data.message);
+  } 
+};
   return (
     <div>
       <section className="flex flex-col items-center pt-6">
@@ -101,4 +110,4 @@ const Signup = () => {
   )
 }
 
-export default Signup
+export default Signup;
