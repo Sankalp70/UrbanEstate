@@ -1,6 +1,9 @@
-import React from 'react'
+import React from 'react';
+import axios from 'axios';
 
 const Login = () => {
+
+ 
   return (
     <div>
          <section className="flex flex-col items-center pt-6">
@@ -9,7 +12,7 @@ const Login = () => {
       <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
        Login Page
       </h1>
-      <form className="space-y-4 md:space-y-6" method="POST">
+      <form className="space-y-4 md:space-y-6" method="POST" onSubmit={handleSubmit}>
        
         <div>
           <label
@@ -23,7 +26,6 @@ const Login = () => {
             name="username"
             id="username"
             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="emelia_erickson24"
             required=""
           />
         </div>
@@ -38,7 +40,6 @@ const Login = () => {
             type="password"
             name="password"
             id="password"
-            placeholder="••••••••"
             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             required=""
           />
@@ -53,7 +54,7 @@ const Login = () => {
           Already have an account?{" "}
           <a
             className="font-medium text-blue-600 hover:underline dark:text-blue-500"
-            href="/signin"
+            href="/"
           >
             Sign in here
           </a>
