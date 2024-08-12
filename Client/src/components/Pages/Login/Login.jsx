@@ -20,11 +20,14 @@ const Login = () => {
         password,
       });
 
+      console.log("the data is", res);
+
       navigate("/login");
     } catch (err) {
       console.log(err);
     }
   };
+
   return (
     <div>
       <section className="flex flex-col items-center pt-6">
