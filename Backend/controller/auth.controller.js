@@ -7,21 +7,19 @@ export const login = async(req,res)=>{
 const {username,password}=req.body;  
 
     try {
-      //Check User Already Registered or Not
+     
           const user = await prisma.user.findUnique({
             where:{username}
           })      
 
          if(!user) return res.status(401).json({message:"Invalid Username"})
           
-          //Checking the password of the user
+       
          const isPasswordValid = await bcrypt.compare(password,user.password)
 
          if(!isPasswordValid) return res.status(401).json({message:"Invalid Password"})
 
-         //Generate Cookie and Send to the user
-         
-        //  res.setHeader("Set-Cookie","test="+"myValue").json({message:"success"})
+     
         const age = 1000 * 60 * 60 * 24 * 7
         const token = jwt.sign({
           id:user.id
@@ -48,13 +46,11 @@ export const register = async (req,res)=>{
 
   const {username,email,password}=req.body
 
-  //Hash the password
+  
 
   const hashedPassword = await bcrypt.hash(password,10)
 
   console.log(hashedPassword)
-
-  //Create a new user and save to the database
 
   const newUser = await prisma.user.create({
     data:{
@@ -70,7 +66,7 @@ export const register = async (req,res)=>{
 
 }
 
-//Logout Function
+
 
 export const logout = (req,res)=>{
 
